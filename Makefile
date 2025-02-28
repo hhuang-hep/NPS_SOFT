@@ -170,6 +170,14 @@ TDVCSBaseS           =TDVCSBase.$(SrcSuf) \
 
 TDVCSBaseSO          =libTDVCSBase.$(DllSuf)
 
+TDVCSDBO        =TDVCSDB.$(ObjSuf) \
+                       TDVCSDBDict.$(ObjSuf)
+
+TDVCSDBS           =TDVCSDB.$(SrcSuf) \
+                       TDVCSDBDict.$(SrcSuf)
+
+TDVCSDBSO          =libTDVCSDB.$(DllSuf)
+
 TDVCSGeometryO       =TDVCSGeometry.$(ObjSuf) \
                       TDVCSGeometryDict.$(ObjSuf)
 
@@ -399,7 +407,7 @@ CODALIBS =  libevio.so  libswap.so libet.so
 
 #OBJS          = $(TDVCSBaseO) $(TDVCSGeometryO) $(TDVCSParametersO) $(TDVCSEventMCO) $(TDVCSEventO) $(TCaloEventO) $(TCaloBlockO) $(TCaloClusterO) $(TCaloBaseO) $(TCaloGeometryO) $(TCaloParametersO) $(TCaloCalibrationO) $(TARSBaseO) $(TARSWaveO) $(TARSChannelO) $(TPABaseO) $(TPAGeometryO) $(TPAParametersO) $(TPACalibrationO) $(TPAEventO) $(TPABlockO) $(TCaloTriggerO) $(TFloatO) $(TShortO) $(TPATriggerO) $(TBlockO) $(TARSArrayO) $(TShortArrayO) $(MAINO) $(MAIN2O)
 
-SLIB          = $(TDVCSBaseSO) $(TDVCSGeometrySO) $(TDVCSParametersSO) $(TDVCSEventMCSO) $(TDVCSEventSO) $(TCaloEventSO) $(TCaloBlockSO) $(TCaloClusterSO) $(TCaloBaseSO) $(TCaloGeometrySO) $(TCaloParametersSO) $(TARSBaseSO) $(TARSWaveSO) $(TARSChannelSO) $(TCaloCalibrationSO) $(TPABaseSO) $(TPAGeometrySO) $(TPAParametersSO) $(TPACalibrationSO) $(TPAEventSO) $(TPABlockSO) $(TCaloTriggerSO) $(TPATriggerSO) $(TFloatSO) $(TShortSO) $(TBlockSO) $(TARSArraySO) $(TShortArraySO)
+SLIB          = $(TDVCSBaseSO) $(TDVCSGeometrySO) $(TDVCSParametersSO) $(TDVCSEventMCSO) $(TDVCSEventSO) $(TCaloEventSO) $(TCaloBlockSO) $(TCaloClusterSO) $(TCaloBaseSO) $(TCaloGeometrySO) $(TCaloParametersSO) $(TARSBaseSO) $(TARSWaveSO) $(TARSChannelSO) $(TCaloCalibrationSO) $(TPABaseSO) $(TPAGeometrySO) $(TPAParametersSO) $(TPACalibrationSO) $(TPAEventSO) $(TPABlockSO) $(TCaloTriggerSO) $(TPATriggerSO) $(TFloatSO) $(TShortSO) $(TBlockSO) $(TARSArraySO) $(TShortArraySO) $(TDVCSDBSO)
 
 PROGRAMS      = $(MAIN) $(MAIN2)
 

@@ -14,7 +14,7 @@ using namespace std;
 class TARSWave2 : public TObject
 {
  private:
-  Double_t* refshape;//->[128]
+    Double_t* refshape;//[128]
   Double_t* shape;//[128]
   Double_t* fit;//!
   Double_t fb;//Fitted base line
@@ -24,7 +24,7 @@ class TARSWave2 : public TObject
   Double_t ft1n;//First pulse arrival time no correction applied
   Double_t ft2;//Second pulse arrival time
   Double_t ft2n;//Second pulse arrival time no correction applied
-  Double_t *matrix0;
+  Double_t *matrix0;//!
   TMatrixD **matrix1;//!
   TMatrixD ***matrix2;//!
   TMatrixD ***matrix2nb;//!
@@ -49,7 +49,7 @@ class TARSWave2 : public TObject
   Double_t chi22;//!
   Int_t fChan;//Channel number
   Int_t fRun;//Run number
-  Float_t *timecorr;//ARS time correction
+  Float_t *timecorr;//!ARS time correction
   void SetPars(void);
 
  public:

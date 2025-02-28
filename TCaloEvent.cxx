@@ -449,7 +449,7 @@ void TCaloEvent::TriggerSimulationReal(Double_t FourBlocksThreshold)
    if(blinv[j]!=-1){
      fblocktmp[blinv[j]] = (TCaloBlock*)fCaloBlocks->UncheckedAt(blinv[j]);
    }
-   for(Int_t ik=0;ik<4;ik++) block[ik]='\0';
+   for(Int_t ik=0;ik<4;ik++) block[ik]=0;
    ef=0.;
    if(blinv[j]!=-1){
      block[0] =(TCaloBlock*)fCaloBlocks->UncheckedAt(blinv[j]);
@@ -801,9 +801,9 @@ void TCaloEvent::GetMax(Float_t enei[8],Int_t nei[8], Int_t &virusbl ,Float_t &m
 //_____________________________________________________________________________
  Int_t TCaloEvent::DoClustering(Double_t timemin, Double_t timemax, Float_t BlockThreshold)
 {
-  //    It does the clustering following the cellular automata method. 
+  //It does the clustering following the cellular automata method. 
   //It finds how many clusters there are and fills the corresponding clusters.
-  //    One optional parameter is implemented:
+  //One optional parameter is implemented:
   //BlockThreshold is the energy threshold for a block to be taken into account by the clustering method. 
   //Blocks with energy lower or equal to BlockThreshold will be neglected and will not be place in any cluster.
   //This parameter may not be used as the trigger would do the job, 

@@ -1,6 +1,6 @@
 //
 // TDVCSDB.cxx, v1.0, Thu Mar  25 14:42:50
-// Author: C. Muñoz
+// Author: C. Munoz
 //
 
 #include "TDVCSDB.h"
@@ -197,7 +197,7 @@ Int_t TDVCSDB::DeleteTable(char* nametable)
 }//20190410(finish)
 
 //_____________________________________________________________________________
-Int_t TDVCSDB::CopyEntry(char* tablename, Int_t run, Int_t runmin, Int_t runmax, char* comment)
+Int_t TDVCSDB::CopyEntry(const char* tablename, Int_t run, Int_t runmin, Int_t runmax, const char* comment)
 {
   //Copy values of run 'run' for runs between 'runmin' and 'runmax'
 
@@ -226,7 +226,7 @@ Int_t TDVCSDB::CopyEntry(char* tablename, Int_t run, Int_t runmin, Int_t runmax,
 }
 
 //_____________________________________________________________________________
-Int_t TDVCSDB::AddEntry(char* tablename, Int_t runmin, Int_t runmax, Int_t col, Double_t val, char* comment)
+Int_t TDVCSDB::AddEntry(const char* tablename, Int_t runmin, Int_t runmax, Int_t col, Double_t val, const char* comment)
 {
   //    It adds an entry to table 'tablename' with value 'val' to column 'col'.
   // Values for other columns are copied from the precedent entry. This method
@@ -279,7 +279,7 @@ Int_t TDVCSDB::AddEntry(char* tablename, Int_t runmin, Int_t runmax, Int_t col, 
   
 }
 //_____________________________________________________________________________
-Int_t TDVCSDB::AddOneEntry(char* tablename, Int_t runmin, Int_t runmax, Double_t val, char* comment)
+Int_t TDVCSDB::AddOneEntry(const char* tablename, Int_t runmin, Int_t runmax, Double_t val, const char* comment)
 {
   //    It adds an entry to one-column table 'tablename' with value 'val'.
 
@@ -319,7 +319,7 @@ Int_t TDVCSDB::AddOneEntry(char* tablename, Int_t runmin, Int_t runmax, Double_t
 }
 
 //_____________________________________________________________________________
-Int_t TDVCSDB::AddEntry(char* tablename, Int_t run, Int_t runmin, Int_t runmax, Int_t col, Double_t val, char* comment)
+Int_t TDVCSDB::AddEntry(const char* tablename, Int_t run, Int_t runmin, Int_t runmax, Int_t col, Double_t val,const char* comment)
 {
   //    It adds an entry to table 'tablename' with value 'val' to column 'col'.
   // Values for other columns are copied from run 'run'. This method
@@ -373,7 +373,7 @@ Int_t TDVCSDB::AddEntry(char* tablename, Int_t run, Int_t runmin, Int_t runmax, 
 }
 
 //_____________________________________________________________________________
-Int_t TDVCSDB::AddEntry(char* tablename, Int_t runmin, Int_t runmax, char* filename, char* comment)
+Int_t TDVCSDB::AddEntry(const char* tablename, Int_t runmin, Int_t runmax, char* filename, const char* comment)
 {
   //    It adds an entry to table 'tablename' reading values from 'filename;
   //
@@ -419,7 +419,7 @@ Int_t TDVCSDB::AddEntry(char* tablename, Int_t runmin, Int_t runmax, char* filen
 }
 
 //_____________________________________________________________________________
-void TDVCSDB::AddEntry_f(char* tablename, Int_t runmin, Int_t runmax, Float_t * val, char* comment)
+void TDVCSDB::AddEntry_f(const char* tablename, Int_t runmin, Int_t runmax, Float_t * val, const char* comment)
 {
   //    It adds an entry to table 'tablename' reading values from 'filename;
   //
@@ -460,7 +460,7 @@ void TDVCSDB::AddEntry_f(char* tablename, Int_t runmin, Int_t runmax, Float_t * 
   
 }
 //_____________________________________________________________________________
-void TDVCSDB::AddEntry_i(char* tablename, Int_t runmin, Int_t runmax, Int_t * val, char* comment)
+void TDVCSDB::AddEntry_i(const char* tablename, Int_t runmin, Int_t runmax, Int_t * val, const char* comment)
 {
   //    It adds an entry to table 'tablename' reading values from 'filename;
   //
@@ -501,7 +501,7 @@ void TDVCSDB::AddEntry_i(char* tablename, Int_t runmin, Int_t runmax, Int_t * va
   
 }
 //_____________________________________________________________________________
-void TDVCSDB::AddEntry_d(char* tablename, Int_t runmin, Int_t runmax, Double_t * val, char* comment)
+void TDVCSDB::AddEntry_d(const char* tablename, Int_t runmin, Int_t runmax, Double_t * val, const char* comment)
 {
   //    It adds an entry to table 'tablename' reading values from 'filename;
   //

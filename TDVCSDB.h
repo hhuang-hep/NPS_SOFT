@@ -1,6 +1,6 @@
 //
 // TDVCSDB.h, v1.0, Thu Mar  25 14:42:50
-// Author: C. Muñoz Camacho
+// Author: C. Munoz Camacho
 //
 
 #ifndef __TDVCSDB__
@@ -68,14 +68,14 @@ class TDVCSDB : public TObject
     Int_t DeleteTable(char* nametable);
     //20190410(finish)
     
-    Int_t AddEntry(char* tablename, Int_t runmin, Int_t runmax, Int_t col, Double_t val, char* comment=""); 
-    Int_t AddEntry(char* tablename, Int_t run, Int_t runmin, Int_t runmax, Int_t col, Double_t val, char* comment=""); 
-    Int_t AddEntry(char* tablename, Int_t runmin, Int_t runmax, char* filename, char* comment="");
-    void AddEntry_f(char* tablename, Int_t runmin, Int_t runmax, Float_t* val, char* comment="");
-    void AddEntry_d(char* tablename, Int_t runmin, Int_t runmax, Double_t* val, char* comment="");
-    void AddEntry_i(char* tablename, Int_t runmin, Int_t runmax, Int_t* val, char* comment="");
-    Int_t AddOneEntry(char* tablename, Int_t runmin, Int_t runmax, Double_t val, char* comment="");
-    Int_t CopyEntry(char* tablename, Int_t run, Int_t runmin, Int_t runmax, char* comment="");
+    Int_t AddEntry(const char* tablename, Int_t runmin, Int_t runmax, Int_t col, Double_t val, const char* comment=""); 
+    Int_t AddEntry(const char* tablename, Int_t run, Int_t runmin, Int_t runmax, Int_t col, Double_t val, const char* comment=""); 
+    Int_t AddEntry(const char* tablename, Int_t runmin, Int_t runmax, char* filename, const char* comment="");
+    void AddEntry_f(const char* tablename, Int_t runmin, Int_t runmax, Float_t* val, const char* comment="");
+    void AddEntry_d(const char* tablename, Int_t runmin, Int_t runmax, Double_t* val, const char* comment="");
+    void AddEntry_i(const char* tablename, Int_t runmin, Int_t runmax, Int_t* val, const char* comment="");
+    Int_t AddOneEntry(const char* tablename, Int_t runmin, Int_t runmax, Double_t val, const char* comment="");
+    Int_t CopyEntry(const char* tablename, Int_t run, Int_t runmin, Int_t runmax, const char* comment="");
 
     void AddShift(char* name, char * username, char* date, char* shift, char* job);
     void AddNewShift(char* date, char* shift, char* job);
