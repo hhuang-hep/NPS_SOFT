@@ -1,6 +1,6 @@
 //
 // TDoubleArray.cxx, v1.0, Thu Dec  5 14:42:50
-// Author: C. Muñoz Camacho
+// Author: C. Muï¿½oz Camacho
 //
 #include <cstdlib>
 #include <cassert>
@@ -95,7 +95,7 @@ TDoubleArray::TDoubleArray(const TDoubleArray & copy) : fHisto(0), fCanvas(0)
 
 
 //_____________________________________________________________________________
-void TDoubleArray::Draw(char * opt="")
+void TDoubleArray::Draw(const char* opt="")
 {
   TPad* pad=0;
   Draw(pad);
@@ -314,7 +314,7 @@ Int_t TDoubleArray::GetMaximumBin(Int_t nmin, Int_t nmax)
 }
 
 //_____________________________________________________________________________
-void TDoubleArray::Draw(TPad * pad, Float_t min, Float_t max, char* opt)
+void TDoubleArray::Draw(TPad * pad, Float_t min, Float_t max, const char* opt)
 {
   //   Draws a display of the TDoubleArray in a TH1F.
   //If a pointer to a pad is provided it is display in that pad. Otherwise

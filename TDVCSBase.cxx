@@ -136,7 +136,7 @@ Bool_t           TDVCSBase::fgErrors = kTRUE;
 }
 
 //_____________________________________________________________________________
- void TDVCSBase::Print(char* opt)
+ void TDVCSBase::Print(const char* opt)
 {
   // Output on screen
 

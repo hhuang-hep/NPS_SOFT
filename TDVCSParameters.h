@@ -48,7 +48,7 @@ class TDVCSParameters : public TObject
   void Init(const char*);                   // Read parameters from files
   void InitDB(Int_t run);
 
-  virtual void Print(char*);
+  virtual void Print(const char*);
 
   ClassDef(TDVCSParameters,1)         // DVCS Parameter Class
 

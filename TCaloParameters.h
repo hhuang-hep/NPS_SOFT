@@ -39,12 +39,12 @@ class TCaloParameters : public TObject
   public:
 
   TCaloParameters();
-  TCaloParameters(char *);
+  TCaloParameters(const char*);
   virtual ~TCaloParameters();
 
   void Init(const char*);                   // Read parameters from files
   void InitDB(Int_t run);
-  virtual void Print(char*);
+  virtual void Print(const char*);
 
   Float_t GetClusWo(void) {return fClustWo ; }
   Float_t GetClusEth(void) {return fClustEth ; }

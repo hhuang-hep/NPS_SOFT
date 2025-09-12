@@ -131,7 +131,7 @@ void TDVCSGlobal::Print() {
   cout<<fgdp->GetValue(0)<<endl;
 }
 
-Bool_t TDVCSGlobal::RunChange(char* filename) {
+Bool_t TDVCSGlobal::RunChange(const char*  filename) {
 
   //20190403(start)
   //temporarily commented out
@@ -276,7 +276,7 @@ Double_t TDVCSGlobal::GetTimeCor(void){
   }
 }
 
-Int_t TDVCSGlobal::GetTree(char * treename){
+Int_t TDVCSGlobal::GetTree(const char*  treename){
   
   TString tree=treename;
   Bool_t kcaloev=0,kpaev=0,kvetoev=0,ktree=0;
@@ -362,7 +362,7 @@ void TDVCSGlobal::UpdateDVCS(void){
   cout<<"DVCS geometry and parameters for run "<<run<<" loaded from mysql database."<<endl;
 }
 
-void TDVCSGlobal::Update(char* filename){
+void TDVCSGlobal::Update(const char*  filename){
  
   //20190403(start)
   //temporarily commented out

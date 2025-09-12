@@ -619,7 +619,7 @@ Int_t TCaloEvent::GetScaler(Int_t id)
 }
 
 //_____________________________________________________________________________
-void TCaloEvent::SetScaler(char* name, Int_t val)
+void TCaloEvent::SetScaler(const char*  name, Int_t val)
 {
   //It sets the value of scaler name
 
@@ -639,7 +639,7 @@ void TCaloEvent::SetScaler(char* name, Int_t val)
 }
 
 //_____________________________________________________________________________
-Int_t TCaloEvent::GetScaler(char* name)
+Int_t TCaloEvent::GetScaler(const char*  name)
 {
   //It gets the value of scaler name
   Int_t id=100000000;
@@ -663,7 +663,7 @@ Int_t TCaloEvent::GetScaler(char* name)
  }
 
 //_____________________________________________________________________________
-void TCaloEvent::SetScalersNames(const char *names)
+void TCaloEvent::SetScalersNames(const char* names)
 {
   //Sets the names of scalers: ex "scaler1:scaler2:scaler3")  
 
@@ -1256,7 +1256,7 @@ void TCaloEvent::Display(TPad *display, Float_t HistMax, Float_t BlockThreshold)
 //}
 
 //_____________________________________________________________________________
- void TCaloEvent::AddSimPulse(char* filename, Double_t energy, Int_t samples)
+ void TCaloEvent::AddSimPulse(const char*  filename, Double_t energy, Int_t samples)
 {
   //  Adds a DVCS pulse
 
@@ -1269,7 +1269,7 @@ void TCaloEvent::Display(TPad *display, Float_t HistMax, Float_t BlockThreshold)
 }
 
 //_____________________________________________________________________________
-void TCaloEvent::InitRefShapeMC(char * filename, Int_t samples)
+void TCaloEvent::InitRefShapeMC(const char* filename, Int_t samples)
 {
   TString fname=filename;
   ifstream f(fname.Data());
@@ -1278,7 +1278,7 @@ void TCaloEvent::InitRefShapeMC(char * filename, Int_t samples)
 }
 
 //_____________________________________________________________________________
- void TCaloEvent::AddNoise(char* filename, UInt_t seed1, UInt_t seed2)
+ void TCaloEvent::AddNoise(const char*  filename, UInt_t seed1, UInt_t seed2)
 {
   //  Warning: Noise is added to the raw TARSWave, not the pedestal-substracted
   //one. This means you need to add noise first and then substract the pedestal. 
@@ -1324,7 +1324,7 @@ void TCaloEvent::InitRefShapeMC(char * filename, Int_t samples)
 }
 
 //_____________________________________________________________________________
-void TCaloEvent::InitNoise(char* filename, UInt_t seed1, UInt_t seed2)
+void TCaloEvent::InitNoise(const char*  filename, UInt_t seed1, UInt_t seed2)
 {
 
   TString fname=filename;
@@ -1348,7 +1348,7 @@ void TCaloEvent::InitNoise(char* filename, UInt_t seed1, UInt_t seed2)
 }
 
 //_____________________________________________________________________________
- void TCaloEvent::Print(char* opt)
+ void TCaloEvent::Print(const char*  opt)
 {
   //    Output on screen: number of blocks, list of blocks with
   //corresponding energy, number of clusters in the event.

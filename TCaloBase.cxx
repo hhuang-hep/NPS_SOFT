@@ -122,7 +122,7 @@ TCaloBase::TCaloBase(Int_t run)
 }
 
 //_____________________________________________________________________________
- void TCaloBase::Print(char* opt)
+ void TCaloBase::Print(const char* opt)
 {
   // Output on screen
 

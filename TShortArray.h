@@ -50,7 +50,7 @@ class TShortArray: public TObject
   TShortArray(int,Short_t *);
   ~TShortArray();
   void Init(Int_t lenght);
-  void Draw(char * opt);
+  void Draw(const char* opt);
   void Draw(TPad *pad=0);
   void Clear();
   void RandomFill(UInt_t seed=123, Short_t max=10);

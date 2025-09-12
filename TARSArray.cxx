@@ -140,7 +140,7 @@ TARSWave* TARSArray::AddWave(Int_t size)
 }
 
 //_____________________________________________________________________________
- void TARSArray::Print(char* opt)
+ void TARSArray::Print(const char* opt)
 {
   //    Output on screen: number of waves in the array.
   //If option "C" is specified the method Print() of each of the wave is called.

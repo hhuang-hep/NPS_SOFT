@@ -1,6 +1,6 @@
 //
 // TARSWave.cxx, v1.0, Thu Dec  5 14:42:50
-// Author: C. Muñoz Camacho
+// Author: C. Muï¿½oz Camacho
 
 #ifndef __TARSWave__
 #include "TARSWave.h"
@@ -57,7 +57,7 @@ Double_t        *TARSWave::fgt=0;
 }
 
 //_____________________________________________________________________________
-  void TARSWave::SubstractPedestalDB(Int_t chan, Int_t run, char* dec)
+  void TARSWave::SubstractPedestalDB(Int_t chan, Int_t run, const char* dec)
 {
   if(!fgPedIsInit) InitPedDB(run);
   fSubstracted=1;
@@ -73,12 +73,12 @@ Double_t        *TARSWave::fgt=0;
 }
 
 //_____________________________________________________________________________
-  void TARSWave::SubstractPedestalDB(Int_t chan, char* dec)
+  void TARSWave::SubstractPedestalDB(Int_t chan, const char* dec)
 {
   SubstractPedestalDB(chan, 4000, dec);
 }
 //_____________________________________________________________________________
-  void TARSWave:: SubstractPedestal(Int_t chan, Int_t run, char* dec)
+  void TARSWave:: SubstractPedestal(Int_t chan, Int_t run, const char* dec)
 {
   //This method is to be used if you have a slow connection to the database (eg. 
   //working offsite) and are not interested in latest pedestals. Pedestals are read
@@ -489,7 +489,7 @@ Double_t TARSWave::GetARSCor(void)
 }
 
 //_____________________________________________________________________________
-Int_t TARSWave::Analyze(char *opt, Double_t *rawtimes)
+Int_t TARSWave::Analyze(const char* opt, Double_t *rawtimes)
 {
   // Shape analysis method. It analyses the waveform. It returns the number of pulses 
   //found. This number can also be accessed by TARSWave::GetNbPulses(). 
@@ -628,7 +628,7 @@ Int_t TARSWave::Analyze(char *opt, Double_t *rawtimes)
 }
 
  //_____________________________________________________________________________
-void TARSWave::SetFirstWindow(Int_t min, Int_t max, char *opt, Bool_t kFORCE)
+void TARSWave::SetFirstWindow(Int_t min, Int_t max, const char* opt, Bool_t kFORCE)
 {
   TString option=opt;
 
@@ -647,7 +647,7 @@ void TARSWave::SetFirstWindow(Int_t min, Int_t max, char *opt, Bool_t kFORCE)
 }
 
  //_____________________________________________________________________________
-void TARSWave::SetSecondWindow(Int_t min1, Int_t max1, Int_t min2, Int_t max2, char *opt, Bool_t kFORCE)
+void TARSWave::SetSecondWindow(Int_t min1, Int_t max1, Int_t min2, Int_t max2, const char* opt, Bool_t kFORCE)
 {
   TString option=opt;
 
@@ -665,7 +665,7 @@ void TARSWave::SetSecondWindow(Int_t min1, Int_t max1, Int_t min2, Int_t max2, c
 }
 
 //_____________________________________________________________________________
-TDoubleArray* TARSWave::GetFit(char* opt)
+TDoubleArray* TARSWave::GetFit(const char* opt)
 {
   //It returns an array with the fit waveform.
   //We need to specify the opt "data" or "LED" according to the analyze
@@ -710,7 +710,7 @@ TDoubleArray* TARSWave::GetFit(char* opt)
 }
 
 //_____________________________________________________________________________
-void TARSWave::SetNbChannel(Int_t n, char* detector="CALO")
+void TARSWave::SetNbChannel(Int_t n, const char* detector="CALO")
 {
   TString dec=detector;
   fNbChannel=n;
@@ -720,7 +720,7 @@ void TARSWave::SetNbChannel(Int_t n, char* detector="CALO")
 }
 
 //_____________________________________________________________________________
-Int_t TARSWave::GetNbChannel(Int_t n, char* detector="CALO")
+Int_t TARSWave::GetNbChannel(Int_t n, const char* detector="CALO")
 {
 
   TString dec=detector;
@@ -1120,14 +1120,14 @@ void TARSWave::Clear(Option_t *option)
 }
 
 //_____________________________________________________________________________
-void TARSWave::DrawRaw(TPad *canvas, char* opt, Float_t min, Float_t max)
+void TARSWave::DrawRaw(TPad *canvas, const char* opt, Float_t min, Float_t max)
 {
   // Draws the ARSWave (without the pedestal substraction) in canvas
 
   fWave->Draw(canvas,min,max,opt);
 }
 //_____________________________________________________________________________
-void TARSWave::DrawSignal(TPad *canvas, char* opt, Float_t min, Float_t max)
+void TARSWave::DrawSignal(TPad *canvas, const char* opt, Float_t min, Float_t max)
 {
   // Draws the ARSWave (without the pedestal substraction) in canvas
 

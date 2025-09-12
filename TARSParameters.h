@@ -37,16 +37,16 @@ class TARSParameters : public TObject
   void PrintShape();
   void PrintShape2();
   void Compute();
-  void SetShape(const char *);// load shape from a file
+  void SetShape(const char*);// load shape from a file
   Double_t  GetBase(Int_t n);// return value of baseline for sample n
   TDoubleArray *  GetBase(){return fBase;};// return value of baseline for sample n
   Double_t  GetShape(Int_t n);// return value of baseline for sample n
   Double_t  GetSum(Int_t n);// return value of baseline for sample n
   Double_t  GetShape2(Int_t n,Int_t m);// return value of crossproduct sum
-  void SetPedestal(const char *);// load pedestal
+  void SetPedestal(const char*);// load pedestal
   void SetPedestal(TProfile *);// load pedestal
-  void DrawShape(char * opt=""){fShape->Draw(opt);};
-  void DrawBase(char * opt=""){fBase->Draw(opt);};
+  void DrawShape(const char* opt=""){fShape->Draw(opt);};
+  void DrawBase(const char* opt=""){fBase->Draw(opt);};
   TMatrixD * GetMatrix1(Int_t i);
   TMatrixD * GetMatrix2(Int_t i,Int_t j);
  protected:

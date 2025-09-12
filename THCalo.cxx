@@ -186,7 +186,7 @@ ClassImp(THCalo)
 }
 
 //_____________________________________________________________________________
- void THCalo::Draw(char* opt)
+ void THCalo::Draw(const char* opt)
 {
   //Draw the THCalo. Two options are supported : "colz" and "text".
   //Default option is "colztext"

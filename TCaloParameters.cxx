@@ -40,7 +40,7 @@ TString  TCaloParameters::fConfig;
 }
 
 //____________________________________________________________________________
- TCaloParameters::TCaloParameters(char* param)
+ TCaloParameters::TCaloParameters(const char* param)
 {
   Init(param);
 }
@@ -86,7 +86,7 @@ void TCaloParameters::InitDB(Int_t run)
 }
 
 //_____________________________________________________________________________
- void TCaloParameters::Print(char* opt)
+ void TCaloParameters::Print(const char* opt)
 {
   // Simple printout method, should give more interesting information
 

@@ -113,7 +113,7 @@ TString  TDVCSGeometry::fConfig;            // Config file
 }
 
 //_____________________________________________________________________________
- void TDVCSGeometry::Print(char* opt)
+ void TDVCSGeometry::Print(const char* opt)
 {
   // Simple printout method, should give more interesting information
 

@@ -53,7 +53,7 @@ class TARSArray : public TObject
 
   //virtual void Copy(TObject&);
 
-  virtual void Print(char* opt="");
+  virtual void Print(const char* opt="");
 
   TARSWave* AddWave(void);
   TARSWave* AddWave(Int_t size);

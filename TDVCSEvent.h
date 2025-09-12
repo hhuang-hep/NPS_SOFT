@@ -83,7 +83,7 @@ class TDVCSEvent : public TDVCSBase
   
   TCaloEvent* GetCaloEvent(void) { return fCaloEvent ; }
   void SetCaloEvent(TCaloEvent *caloevent) {fCaloEvent=caloevent ;}
-  virtual void Print(char* opt="");
+  virtual void Print(const char*  opt="");
 
   Bool_t ThereIsAProton(void); 
 

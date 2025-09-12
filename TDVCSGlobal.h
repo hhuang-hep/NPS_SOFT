@@ -17,20 +17,20 @@ class TDVCSGlobal {
   TDVCSGlobal(int v);
 
   void Print();
-  Int_t GetTree(char *treename="all");
+  Int_t GetTree(const char*  treename="all");
   //20190403(start)
   //temporarily commented out
-  /* Int_t GetRun(char* filename); */
+  /* Int_t GetRun(const char*  filename); */
   //20190403(finish)
   TARSWave* GetWave(void) {return wave;}
-  Bool_t RunChange(char* filename);
+  Bool_t RunChange(const char*  filename);
   void UpdateCalo(void);
   void UpdatePA(void);
   void UpdateVeto(void);
   void UpdateDVCS(void);
   void UpdatePedestals(void);
   void UpdateWFAna(void);
-  void Update(char* filename);
+  void Update(const char*  filename);
   void UpdateTimeCor(void);
   //20190403(start)
   //temporarily commented out because when using in geant4, it gives error
@@ -84,7 +84,7 @@ class TDVCSGlobal {
   static Bool_t *fgstatusPA;
   static Bool_t *fgstatusVeto;
 
-  char* currentfile;
+  char*  currentfile;
   THaEvent *ha2;
   THaRun *harun;
   TCaloEvent *caloev;

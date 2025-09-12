@@ -90,7 +90,7 @@ void TDVCSParameters::InitDB(Int_t run)
 }
 
 //_____________________________________________________________________________
- void TDVCSParameters::Print(char* opt)
+ void TDVCSParameters::Print(const char* opt)
 {
   // Simple printout method, should give more interesting information
 

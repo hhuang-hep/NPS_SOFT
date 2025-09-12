@@ -50,7 +50,7 @@ class TDVCSBase : public TObject
   virtual void Init(void);
   virtual void InitDB(void);
 
-  virtual void Print(char* opt="");
+  virtual void Print(const char* opt="");
 
   void InitGeometry(void);
   void InitGeometryDB(void);

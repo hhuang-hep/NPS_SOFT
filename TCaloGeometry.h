@@ -61,7 +61,7 @@ class TCaloGeometry : public TObject
   public:
 
   TCaloGeometry(Int_t run=0);
-  TCaloGeometry(const char *);              // Constructor with data file
+  TCaloGeometry(const char*);              // Constructor with data file
   virtual ~TCaloGeometry();
 
   void Init(const char*);                   // Read Geometry from file
@@ -76,12 +76,12 @@ class TCaloGeometry : public TObject
   Float_t GetBlockYPos(Int_t id) { return fBlockYPos[id] ; }
   Float_t GetCenterXPos(void) { return fCenterXPos ; }
   Float_t GetCenterYPos(void) { return fCenterYPos ; }
-  Float_t SetCenterXPos(Float_t val) { fCenterXPos=val ; }
-  Float_t SetCenterYPos(Float_t val) { fCenterYPos=val ; }
+  void SetCenterXPos(Float_t val) { fCenterXPos=val ; }
+  void SetCenterYPos(Float_t val) { fCenterYPos=val ; }
   Int_t GetBlockX(Int_t block) { return fBlockX[block] ; }
   Int_t GetBlockY(Int_t block) { return fBlockY[block] ; }
 
-  virtual void Print(char*);
+  virtual void Print(const char*);
 
   ClassDef(TCaloGeometry,1)           // DVCS Calorimeter Geometry Class
 

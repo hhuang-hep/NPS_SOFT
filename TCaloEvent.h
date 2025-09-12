@@ -82,7 +82,7 @@ class TCaloEvent : public TCaloBase
   TRandom2 *fRan;//!
   Int_t fNoiseTime;//!
   Float_t fRefShapeInt;//!
-  char *fScalerName;//!
+  char* fScalerName;//!
   Int_t *fScalerNameLength;//!
 
   void GetMax(Float_t enei[8],Int_t nei[8], Int_t &virusbl ,Float_t &max);
@@ -108,7 +108,7 @@ class TCaloEvent : public TCaloBase
 
   //virtual void Copy(TObject&);
 
-  virtual void Print(char* opt="");
+  virtual void Print(const char* opt="");
 
   TCaloBlock* AddBlock(Int_t nb);
   void AddBlock(TCaloBlock* block);
@@ -118,10 +118,10 @@ class TCaloEvent : public TCaloBase
   TARSWave* AddWave(TARSWave* wave);
   THCalo* GetHCalo(void) { return fHCalo ; }
   void SetScaler(Int_t id, Int_t val);
-  void SetScaler(char *name, Int_t val);
+  void SetScaler(const char* name, Int_t val);
   Int_t GetScaler(Int_t id=0);
-  Int_t GetScaler(char *name);
-  void SetScalersNames(const char *names);
+  Int_t GetScaler(const char* name);
+  void SetScalersNames(const char* names);
   void Clear(void);
   void Reset(void);
 
@@ -165,13 +165,13 @@ class TCaloEvent : public TCaloBase
   TCaloTrigger* GetCaloTrigger(void) {return fCaloTrigger ; }
   //  void SetARSArray (TARSArray *arsarray) {fARSArray=arsarray ; }
   //  TARSArray* GetARSArray(void) {return fARSArray;}
-  void AddSimPulse(char* filename, Double_t energy, Int_t samples=128);
+  void AddSimPulse(const char* filename, Double_t energy, Int_t samples=128);
   void Display(TPad *display, Float_t HistMax=-1., Float_t BlockThreshold=0.);
   void SetWarnings(Bool_t val) { fgWarnings = val; }
   void SetErrors(Bool_t val) { fgErrors = val; }
-  void InitRefShapeMC(char* filename, Int_t samples=128);
-  void AddNoise(char* filename, UInt_t seed1=65539, UInt_t seed2=34651);
-  void InitNoise(char* filenam, UInt_t seed1, UInt_t seed2);
+  void InitRefShapeMC(const char* filename, Int_t samples=128);
+  void AddNoise(const char* filename, UInt_t seed1=65539, UInt_t seed2=34651);
+  void InitNoise(const char* filenam, UInt_t seed1, UInt_t seed2);
   Int_t Decode(int * buf);
   Double_t GetDT(int i)
   {

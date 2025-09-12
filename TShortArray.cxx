@@ -1,6 +1,6 @@
 //
 // TShortArray.cxx, v1.0, Thu Dec  5 14:42:50
-// Author: C. Muñoz Camacho
+// Author: C. Muï¿½oz Camacho
 //
 
 #ifndef __TShortArray__
@@ -62,7 +62,7 @@ TShortArray::TShortArray(const TShortArray & copy)
 }
 
 //_____________________________________________________________________________
-void TShortArray::Draw(char * opt="")
+void TShortArray::Draw(const char* opt="")
 {
   TPad* pad=0;
   Draw(pad);

@@ -189,7 +189,7 @@ TString  TCaloGeometry::fConfig;            // Config file
 }
 
 //_____________________________________________________________________________
- void TCaloGeometry::Print(char* opt)
+ void TCaloGeometry::Print(const char* opt)
 {
   // Simple printout method, should give more interesting information
 

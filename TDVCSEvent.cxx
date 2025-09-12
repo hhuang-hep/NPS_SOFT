@@ -167,7 +167,7 @@ TVector3 TDVCSEvent::GetProtonDirFast(void)
 }
 
 //_____________________________________________________________________________
- void TDVCSEvent::Print(char* opt)
+ void TDVCSEvent::Print(const char*  opt)
 {
   // Output on screen
 }

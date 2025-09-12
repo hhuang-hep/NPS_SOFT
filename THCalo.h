@@ -60,7 +60,7 @@ class THCalo : public TCaloBase
   void SetMinimum(Float_t min) {fMin=min;}
   void SetMaximum(Float_t max) {fMax=max;}
   void InitDisplay(void);
-  void Draw(char* opt="colztext");
+  void Draw(const char* opt="colztext");
   void SetBinContent(Int_t x, Int_t y, Float_t val);
   void HighlightBin(Int_t tower, Int_t ring);
   void UnHighlightBin(Int_t tower, Int_t ring);

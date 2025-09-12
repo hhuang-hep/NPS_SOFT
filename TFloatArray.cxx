@@ -1,6 +1,6 @@
 //
 // TFloatArray.cxx, v1.0, Thu Dec  5 14:42:50
-// Author: C. Muñoz Camacho
+// Author: C. Muï¿½oz Camacho
 //
 
 #ifndef __TFloatArray__
@@ -56,7 +56,7 @@ TFloatArray::TFloatArray(const TFloatArray & copy)
 }
 
 //_____________________________________________________________________________
-void TFloatArray::Draw(char * opt="")
+void TFloatArray::Draw(const char* opt="")
 {
   TPad* pad=0;
   Draw(pad);

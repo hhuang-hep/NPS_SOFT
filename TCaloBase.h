@@ -42,7 +42,7 @@ class TCaloBase : public TObject
   virtual void Copy(TObject&);
   virtual void Init(Int_t run=0);
 
-  virtual void Print(char* opt="");
+  virtual void Print(const char* opt="");
 
   TCaloGeometry* GetGeometry(void) { return &fgGeometry ; }
   TCaloCalibration* GetCalibration(void) { return &fgCalibration ; }

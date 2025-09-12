@@ -207,7 +207,7 @@ TMatrixD * TARSParameters::GetMatrix2(Int_t i,Int_t j)
      return  (TMatrixD *)(*fMatrix2)[j*fSize+i];
 }
 	 
- void TARSParameters::SetShape(const char * name )
+ void TARSParameters::SetShape(const char* name )
 {
   Double_t r;
   ifstream input(name);
@@ -220,7 +220,7 @@ TMatrixD * TARSParameters::GetMatrix2(Int_t i,Int_t j)
 }
 
 
-void TARSParameters::SetPedestal(const char * name )
+void TARSParameters::SetPedestal(const char* name )
 {
   // load pedestal file
    Double_t r;

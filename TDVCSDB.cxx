@@ -19,7 +19,7 @@ ClassImp(TDVCSDB)
 ////////////////////////////////////////////////////////////////////////////////
 
 //_____________________________________________________________________________
- TDVCSDB::TDVCSDB(char* host, Int_t port, char* user)
+ TDVCSDB::TDVCSDB(const char* host, Int_t port, const char* user)
 {
   TString connect="mysql://"; 
   TString shost=host;
@@ -47,7 +47,7 @@ ClassImp(TDVCSDB)
 }
 
 //_____________________________________________________________________________
- TDVCSDB::TDVCSDB(char* db, char* host, Int_t port, char* user)
+ TDVCSDB::TDVCSDB(const char* db, const char* host, Int_t port, const char* user)
 {
   TString connect="mysql://"; 
   TString shost=host;
@@ -75,7 +75,7 @@ ClassImp(TDVCSDB)
 }
 
 //_____________________________________________________________________________
- TDVCSDB::TDVCSDB(char* db, char* host, Int_t port, char* user, char* passwd)
+ TDVCSDB::TDVCSDB(const char* db, const char* host, Int_t port, const char* user, const char* passwd)
 {
   TString realhost;
   MYSQL *connection,mysql;mysql_init(&mysql);
@@ -156,7 +156,7 @@ ClassImp(TDVCSDB)
 }
 
 //_____________________________________________________________________________
- Int_t TDVCSDB::CreateTable(char* nametable, char* type, Int_t number)
+ Int_t TDVCSDB::CreateTable(const char* nametable, const char* type, Int_t number)
 {
   // Comments
   
@@ -185,7 +185,7 @@ ClassImp(TDVCSDB)
 
 //20190410(start)
 //_____________________________________________________________________________
-Int_t TDVCSDB::DeleteTable(char* nametable)
+Int_t TDVCSDB::DeleteTable(const char* nametable)
 {
   TString query="DROP TABLE ";
   query += nametable;
@@ -373,7 +373,7 @@ Int_t TDVCSDB::AddEntry(const char* tablename, Int_t run, Int_t runmin, Int_t ru
 }
 
 //_____________________________________________________________________________
-Int_t TDVCSDB::AddEntry(const char* tablename, Int_t runmin, Int_t runmax, char* filename, const char* comment)
+Int_t TDVCSDB::AddEntry(const char* tablename, Int_t runmin, Int_t runmax, const char* filename, const char* comment)
 {
   //    It adds an entry to table 'tablename' reading values from 'filename;
   //
@@ -689,7 +689,7 @@ void TDVCSDB::AddEntry_d(const char* tablename, Int_t runmin, Int_t runmax, Doub
 }
 
 //_____________________________________________________________________________
- void TDVCSDB::AddNewShift(char* date, char* shift, char* job)
+ void TDVCSDB::AddNewShift(const char* date, const char* shift, const char* job)
 {
   // Adds a new slot
   TString query("INSERT INTO latestshifts VALUES ('");
@@ -701,7 +701,7 @@ void TDVCSDB::AddEntry_d(const char* tablename, Int_t runmin, Int_t runmax, Doub
 }
 
 //_____________________________________________________________________________
- void TDVCSDB::ClearLatest(char* date, char* shift, char* job)
+ void TDVCSDB::ClearLatest(const char* date, const char* shift, const char* job)
 {
   // Clears a shift in the latestshifts table
   TString query("UPDATE latestshifts SET username=NULL, name=NULL, job='");
@@ -713,7 +713,7 @@ void TDVCSDB::AddEntry_d(const char* tablename, Int_t runmin, Int_t runmax, Doub
 }
 
 //_____________________________________________________________________________
- void TDVCSDB::UpdateLatest(char* name, char * username, char* date, char* shift, char* job)
+ void TDVCSDB::UpdateLatest(const char* name, const char* username, const char* date, const char* shift, const char* job)
 {
   // Updates the latestshift table
   TString query("UPDATE latestshifts SET username='");
@@ -727,7 +727,7 @@ void TDVCSDB::AddEntry_d(const char* tablename, Int_t runmin, Int_t runmax, Doub
 }
 
 //_____________________________________________________________________________
- void TDVCSDB::AddShift(char* name, char * username, char* date, char* shift, char* job)
+ void TDVCSDB::AddShift(const char* name, char * username, const char* date, const char* shift, const char* job)
 {
   // Assocites someone to a shift slot
   TSQLResult *res1=0;
@@ -760,7 +760,7 @@ void TDVCSDB::AddEntry_d(const char* tablename, Int_t runmin, Int_t runmax, Doub
 }
 
 //_____________________________________________________________________________
- void TDVCSDB::ClearShift(char* date, char* shift, char* job)
+ void TDVCSDB::ClearShift(const char* date, const char* shift, const char* job)
 {
   // Makes a shift slot available again
   TSQLResult *res1=0;

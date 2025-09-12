@@ -50,36 +50,36 @@ class TDVCSDB : public TObject
     TSQLServer *fServer;
     TString fUser;
   
-    void UpdateLatest(char* name, char * username, char* date, char* shift, char* job);
-    void ClearLatest(char* date, char* shift, char* job);
+    void UpdateLatest(const char* name, const char*  username, const char*  date, const char*  shift, const char*  job);
+    void ClearLatest(const char*  date, const char*  shift, const char*  job);
 
   public :
 
-    TDVCSDB(char* db, char* host ,Int_t port, char* user);
-    TDVCSDB(char* db, char* host, Int_t port, char* user, char* passwd);
-    TDVCSDB(char* host ,Int_t port, char* user);
+    TDVCSDB(const char*  db, const char*  host ,Int_t port, const char*  user);
+    TDVCSDB(const char*  db, const char*  host, Int_t port, const char*  user, const char*  passwd);
+    TDVCSDB(const char*  host ,Int_t port, const char*  user);
     TDVCSDB(const TDVCSDB&);
     virtual ~TDVCSDB();
 
     Int_t GetLastValueId(const char* nametable, Int_t run);
-    Int_t CreateTable(char* nametable, char* type, Int_t number);
+    Int_t CreateTable(const char*  nametable, const char*  type, Int_t number);
 
     //20190410(start)
-    Int_t DeleteTable(char* nametable);
+    Int_t DeleteTable(const char*  nametable);
     //20190410(finish)
     
     Int_t AddEntry(const char* tablename, Int_t runmin, Int_t runmax, Int_t col, Double_t val, const char* comment=""); 
     Int_t AddEntry(const char* tablename, Int_t run, Int_t runmin, Int_t runmax, Int_t col, Double_t val, const char* comment=""); 
-    Int_t AddEntry(const char* tablename, Int_t runmin, Int_t runmax, char* filename, const char* comment="");
+    Int_t AddEntry(const char* tablename, Int_t runmin, Int_t runmax, const char*  filename, const char* comment="");
     void AddEntry_f(const char* tablename, Int_t runmin, Int_t runmax, Float_t* val, const char* comment="");
     void AddEntry_d(const char* tablename, Int_t runmin, Int_t runmax, Double_t* val, const char* comment="");
     void AddEntry_i(const char* tablename, Int_t runmin, Int_t runmax, Int_t* val, const char* comment="");
     Int_t AddOneEntry(const char* tablename, Int_t runmin, Int_t runmax, Double_t val, const char* comment="");
     Int_t CopyEntry(const char* tablename, Int_t run, Int_t runmin, Int_t runmax, const char* comment="");
 
-    void AddShift(char* name, char * username, char* date, char* shift, char* job);
-    void AddNewShift(char* date, char* shift, char* job);
-    void ClearShift(char* date, char* shift, char* job);
+    void AddShift(const char*  name, char * username, const char*  date, const char*  shift, const char*  job);
+    void AddNewShift(const char*  date, const char*  shift, const char*  job);
+    void ClearShift(const char*  date, const char*  shift, const char*  job);
     
     Double_t* GetEntry_d(const char* tablename, Int_t run);
     Float_t* GetEntry_f(const char* tablename, Int_t run);

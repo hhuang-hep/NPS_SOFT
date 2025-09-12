@@ -155,7 +155,7 @@ void TARSBase::InitAnalysisWindowDB(Int_t* min, Int_t* max, Int_t run)
 }
 
 //____________________________________________________________________________                                                                                                                                
-void TARSBase::ActivateOnly(char *opt)
+void TARSBase::ActivateOnly(const char* opt)
 {
 
   TString option=opt;
@@ -166,7 +166,7 @@ void TARSBase::ActivateOnly(char *opt)
 }
 
 //____________________________________________________________________________
-void TARSBase::InitShapeAnalysis(char *opt)
+void TARSBase::InitShapeAnalysis(const char* opt)
 {
   //It initializes all shape analysis parameters (all matrices...)
   
@@ -257,7 +257,7 @@ void TARSBase::InitShapeAnalysis(char *opt)
 }
 
 //____________________________________________________________________________
-void TARSBase::InitShapeAnalysisDB(Int_t run, char *opt)
+void TARSBase::InitShapeAnalysisDB(Int_t run, const char* opt)
 {
   //It initializes all shape analysis parameters (all matrices...)
 
@@ -368,7 +368,7 @@ void TARSBase::InitShapeAnalysisDB(Int_t run, char *opt)
 }
 
 //____________________________________________________________________________
-void TARSBase::SetRefShape(char *file)
+void TARSBase::SetRefShape(const char* file)
 {
 //   //It initializes all shape analysis parameters (all matrices...)
   
@@ -409,7 +409,7 @@ void TARSBase::SetRefShape(char *file)
 }
 
 //____________________________________________________________________________
-void TARSBase::InitShapeAnalysisLED(char *opt)
+void TARSBase::InitShapeAnalysisLED(const char* opt)
 {
   //It initializes all shape analysis parameters (all matrices...) for LED
   
@@ -466,7 +466,7 @@ void TARSBase::InitShapeAnalysisLED(char *opt)
 }
 
 //____________________________________________________________________________
-void TARSBase::SetFirstWindow(Int_t min, Int_t max, char *opt, Bool_t kFORCE)
+void TARSBase::SetFirstWindow(Int_t min, Int_t max, const char* opt, Bool_t kFORCE)
 {
   //   It sets a different window to look for the first pulse.
   //It does not recalculate matrices if already done, unless we force it to
@@ -489,7 +489,7 @@ void TARSBase::SetFirstWindow(Int_t min, Int_t max, char *opt, Bool_t kFORCE)
 }
 
 //____________________________________________________________________________
-void TARSBase::SetSecondWindow(Int_t min1, Int_t max1, Int_t min2, Int_t max2, char *opt, Bool_t kFORCE)
+void TARSBase::SetSecondWindow(Int_t min1, Int_t max1, Int_t min2, Int_t max2, const char* opt, Bool_t kFORCE)
 {
   //   It sets a different window to look for the second pulse.
   //It does not recalculate matrices if already done, unless we force it to
@@ -512,7 +512,7 @@ void TARSBase::SetSecondWindow(Int_t min1, Int_t max1, Int_t min2, Int_t max2, c
 }
 
 //____________________________________________________________________________
-void TARSBase::InitMatrix2(TMatrixD** matrix2, Int_t k, Int_t j, Int_t i, char *opt, Bool_t kFORCE)
+void TARSBase::InitMatrix2(TMatrixD** matrix2, Int_t k, Int_t j, Int_t i, const char* opt, Bool_t kFORCE)
 {
   // Computes matrix for shift k for a channel i and inverts it
  
@@ -551,7 +551,7 @@ void TARSBase::InitMatrix2(TMatrixD** matrix2, Int_t k, Int_t j, Int_t i, char *
 }
 
 //____________________________________________________________________________
-void TARSBase::InitMatrix1(TMatrixD** matrix1, Int_t k, Int_t i, char *opt, Bool_t kFORCE)
+void TARSBase::InitMatrix1(TMatrixD** matrix1, Int_t k, Int_t i, const char* opt, Bool_t kFORCE)
 {
   // Computes matrix for shift k for a channel i and inverts it
   if((!matrix1[k+fmax[i]]) || kFORCE==kTRUE)
@@ -579,7 +579,7 @@ void TARSBase::InitMatrix1(TMatrixD** matrix1, Int_t k, Int_t i, char *opt, Bool
 }
 
 //____________________________________________________________________________
-void TARSBase::Init(char *opt)
+void TARSBase::Init(const char* opt)
 {
   //It initializes the number of channels and the number of samples
 
@@ -615,7 +615,7 @@ void TARSBase::Init(char *opt)
 }
 
 //_____________________________________________________________________________
- void TARSBase::Print(char* opt)
+ void TARSBase::Print(const char* opt)
 {
   // Output on screen
 
@@ -623,7 +623,7 @@ void TARSBase::Init(char *opt)
 }
 
 //_____________________________________________________________________________
- void TARSBase::DrawShape(Int_t i, char* opt)
+ void TARSBase::DrawShape(Int_t i, const char* opt)
 {
   //
   TString option=opt;
@@ -636,7 +636,7 @@ void TARSBase::Init(char *opt)
 
 //_____________________________________________________________________________
 
-void TARSBase::SetPedestalProfileFile(const char * fname)
+void TARSBase::SetPedestalProfileFile(const char*  fname)
 {
   TFile * f = new TFile(fname);
   cout<<fname<<" "<<f<<(f!=0)<<endl;
@@ -655,7 +655,7 @@ void TARSBase::SetPedestalProfileFile(const char * fname)
 }
 //_____________________________________________________________________________
 
-void TARSBase::PrintPedSigma(const char * opt)
+void TARSBase::PrintPedSigma(const char*  opt)
 {
   //Prints pedestal sigma
 
@@ -668,7 +668,7 @@ void TARSBase::PrintPedSigma(const char * opt)
 
 //_____________________________________________________________________________
 
-void TARSBase::Add2RunningShape(TDoubleArray *wave, Int_t channel, Double_t amp, Double_t time, char* opt)
+void TARSBase::Add2RunningShape(TDoubleArray *wave, Int_t channel, Double_t amp, Double_t time, const char* opt)
 {
   //Adds wave to the running shape of channel
   //Doesn't allow to analyze LED TARSWaves and data together (same channel number)

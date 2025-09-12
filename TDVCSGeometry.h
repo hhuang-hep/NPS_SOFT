@@ -63,7 +63,7 @@ class TDVCSGeometry : public TObject
   void SetCaloPitch(Float_t val) { fCaloPitch=val ; }
   void SetPATheta(Float_t val) { fPATheta=val ; }
   void SetRun(Int_t run) {fRun=run;}
-  virtual void Print(char*);
+  virtual void Print(const char*);
 
   ClassDef(TDVCSGeometry,1)           // DVCS Geometry Class
 

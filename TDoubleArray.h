@@ -39,8 +39,8 @@ class TDoubleArray: public TObject
   TDoubleArray(const TDoubleArray &);
   ~TDoubleArray();
   void Init(Int_t length=128);
-   void Draw(char * opt);
-  void Draw(TPad *pad=0,Float_t min=-10000, Float_t max=-10000,char* opt="");
+   void Draw(const char* opt);
+  void Draw(TPad *pad=0,Float_t min=-10000, Float_t max=-10000,const char* opt="");
   void Clear();
   void RandomFill(UInt_t seed=123, Double_t max=10.);
   Double_t AddValue(Double_t val);

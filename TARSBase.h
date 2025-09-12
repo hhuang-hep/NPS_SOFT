@@ -1,6 +1,6 @@
 //
 // TARSBase.h, v1.0, Thu Sep 12 11:13:57
-// Author: C. Muñoz Camacho
+// Author: C. Muï¿½oz Camacho
 //
 
 #ifndef __TARSBase__
@@ -96,14 +96,14 @@ class TARSBase : public TObject
   virtual ~TARSBase();
 
   //  virtual void Copy(TARSBase&);
-  virtual void Init(char *opt="");
-  virtual void InitShapeAnalysis(char *opt="data");
+  virtual void Init(const char*  opt="");
+  virtual void InitShapeAnalysis(const char*  opt="data");
   void InitAnalysisWindowDB(Int_t* min, Int_t* max, Int_t run);
-  virtual void InitShapeAnalysisDB(Int_t run,char *opt="data");
-  virtual void InitShapeAnalysisLED(char *opt="data");
-  virtual void Print(char* opt="");
+  virtual void InitShapeAnalysisDB(Int_t run,const char*  opt="data");
+  virtual void InitShapeAnalysisLED(const char*  opt="data");
+  virtual void Print(const char* opt="");
   TARSParameters * GetParam(int i){return &fgARSParameters[i];};
-  void ActivateOnly(char *opt);
+  void ActivateOnly(const char*  opt);
   void SetWarnings(Bool_t val) { fgWarnings = val; };
   void SetErrors(Bool_t val) { fgErrors = val; };
   // TARSParameters method
@@ -113,26 +113,26 @@ class TARSBase : public TObject
   //  void Compute(){for (Int_t i=0;i<fNbChannels;i++) fgARSParameters[i].Compute();};
   void SetNewFirstWindow(Int_t min, Int_t max) {fk1min=min;fk1max=max;}
   void SetNewSecondWindow(Int_t min1, Int_t max1, Int_t min2, Int_t max2) { fk1min2=min1; fk1max2=max1; fk2min=min2; fk2max=max2;}
-  void SetShape(Int_t m,const char * fname){fgARSParameters[m].SetShape(fname);};// load shape from a file
+  void SetShape(Int_t m,const char*   fname){fgARSParameters[m].SetShape(fname);};// load shape from a file
   Double_t  GetBase(Int_t m,Int_t n){return fgARSParameters[m].GetBase(n);};// return value of baseline for sample n
   Double_t  GetShape(Int_t m,Int_t n){return fgARSParameters[m].GetShape(n);};// return value of baseline for sample n
   Double_t  GetSum(Int_t m,Int_t n){return fgARSParameters[m]. GetSum(n);};// return value of baseline for sample n
   Double_t  GetShape2(Int_t m,Int_t i,Int_t j){return fgARSParameters[m].GetShape2(i,j);};// return value of crossproduct sum
-  void SetRefShape(char *file);
-  void SetPedestal(Int_t m,const char * fname){ fgARSParameters[m].SetPedestal(fname);};// load pedestal
-  void SetPedestalProfileFile(const char *);
-  void DrawShape(Int_t i, char* opt="");
+  void SetRefShape(const char*  file);
+  void SetPedestal(Int_t m,const char*   fname){ fgARSParameters[m].SetPedestal(fname);};// load pedestal
+  void SetPedestalProfileFile(const char*  );
+  void DrawShape(Int_t i, const char* opt="");
   void DrawBase(Int_t m){fgARSParameters[m].DrawBase();};
   TMatrixD * GetMatrix1(Int_t m,Int_t i){return fgARSParameters[m].GetMatrix1(i);};
   TMatrixD * GetMatrix2(Int_t m,Int_t i,Int_t j){return fgARSParameters[m].GetMatrix2(i,j);};
   void InitPedSigma(void);
-  void PrintPedSigma(const char * opt);
-  void InitMatrix1(TMatrixD** matrix1, Int_t k, Int_t ch, char *opt, Bool_t kFORCE=kFALSE);
-  void InitMatrix2(TMatrixD** matrix2, Int_t k, Int_t j, Int_t ch, char *opt, Bool_t kFORCE=kFALSE);
-  void SetFirstWindow(Int_t min, Int_t max, char *opt, Bool_t kFORCE=kFALSE);
-  void SetSecondWindow(Int_t min1, Int_t max1, Int_t min2, Int_t max2, char *opt, Bool_t kFORCE=kFALSE);
+  void PrintPedSigma(const char*   opt);
+  void InitMatrix1(TMatrixD** matrix1, Int_t k, Int_t ch, const char*  opt, Bool_t kFORCE=kFALSE);
+  void InitMatrix2(TMatrixD** matrix2, Int_t k, Int_t j, Int_t ch, const char*  opt, Bool_t kFORCE=kFALSE);
+  void SetFirstWindow(Int_t min, Int_t max, const char*  opt, Bool_t kFORCE=kFALSE);
+  void SetSecondWindow(Int_t min1, Int_t max1, Int_t min2, Int_t max2, const char*  opt, Bool_t kFORCE=kFALSE);
   //  void SetAnalysisWindow(Int_t min, Int_t max) {fmin=min;fmax=max;}
-  void Add2RunningShape(TDoubleArray *wave, Int_t channel, Double_t amp, Double_t time, char* opt);
+  void Add2RunningShape(TDoubleArray *wave, Int_t channel, Double_t amp, Double_t time, const char* opt);
  Int_t GetNbSamples(void) { return fNbSamples ; }
   TClonesArray* GetRefShapes(char) { return fgRefShapes; }
   TClonesArray* GetRefShapesLED(void) { return fgRefShapesLED; }
