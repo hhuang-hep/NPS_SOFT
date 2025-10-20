@@ -1,6 +1,6 @@
 //
 // TCaloCluster.h, v1.0, Thu Dec  5 14:42:50
-// Author: C. Muñoz Camacho
+// Author: C. Muï¿½oz Camacho
 //
 
 #ifndef __TCaloCluster__
@@ -83,7 +83,7 @@ class TCaloCluster : public TCaloBase
   TClonesArray* GetClusBlock (void) {return fClusBlock ; }
   TCaloBlock *GetBlock(Int_t i);
 
-  void Analyze(Bool_t kFORCE=kFALSE, Float_t timemin=-1000, Float_t timemax=-1000, Float_t wei0=4.3);
+  void Analyze(Bool_t kFORCE=kFALSE, Float_t timemin=-1000, Float_t timemax=-1000, Float_t wei0=4.3, Float_t &wei_out=*(new Float_t));
 
   Float_t GetX(void) { return fX ; }
   Float_t GetY(void) { return fY ; }

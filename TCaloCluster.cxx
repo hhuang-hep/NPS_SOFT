@@ -1,6 +1,6 @@
 //
 // TCaloCluster.cxx, v1.0, Thu Dec  5 14:42:50
-// Author: C. Muñoz Camacho
+// Author: C. Muï¿½oz Camacho
 //
 
 #include <iostream>
@@ -229,7 +229,7 @@ void TCaloCluster::Display(TCanvas *display, Float_t HistMax, Float_t BlockThres
 }
 
 //_____________________________________________________________________________
- void TCaloCluster::Analyze(Bool_t kFORCE, Float_t timemin, Float_t timemax, Float_t wei0)
+ void TCaloCluster::Analyze(Bool_t kFORCE, Float_t timemin, Float_t timemax, Float_t wei0, Float_t &wei_out)
 {
   //    It calculates the fX and fY of the cluster in coordinates in the surface
   //of the calorimeter and sets the cluster energy fEnergy. 
@@ -238,9 +238,12 @@ void TCaloCluster::Display(TCanvas *display, Float_t HistMax, Float_t BlockThres
   if(!fAnalyzed || kFORCE==kTRUE){
 
     Float_t wei,sumwei;
+    Float_t d, RM; // for calculation of wei0 (Malek & Wassim's study)
     Float_t xclust=0.;
     Float_t yclust=0.;
     sumwei=0.;
+    d=2.16; // NPS crystal size in cm
+    RM=2.19; //Moliere Radius of PbWO4 in cm
     
     fEnergy=0.;//GetEnergy();
     Double_t blocksenergy[fgGeometry.GetNBlocks()];
@@ -251,20 +254,20 @@ void TCaloCluster::Display(TCanvas *display, Float_t HistMax, Float_t BlockThres
       blocksenergy[block->GetBlockNumber()]=block->GetBlockEnergy();
 
       if(timemin>-1000||timemax>-1000){
-	if(block->GetEnergy(0)>0.&&(block->GetTime(0)<timemin||block->GetTime(0)>timemax)
-	   &&block->GetEnergy(1)>0.&&(block->GetTime(1)<timemin||block->GetTime(1)>timemax)) {
-	  blocksenergy[block->GetBlockNumber()]=0.;
-	}
-	if(!(block->GetEnergy(1)>0.) &&(block->GetTime(0)<timemin||block->GetTime(0)>timemax))
-	  blocksenergy[block->GetBlockNumber()]=0.;
+        if(block->GetEnergy(0)>0.&&(block->GetTime(0)<timemin||block->GetTime(0)>timemax)
+          &&block->GetEnergy(1)>0.&&(block->GetTime(1)<timemin||block->GetTime(1)>timemax)) {
+          blocksenergy[block->GetBlockNumber()]=0.;
+        }
+        if(!(block->GetEnergy(1)>0.) &&(block->GetTime(0)<timemin||block->GetTime(0)>timemax))
+          blocksenergy[block->GetBlockNumber()]=0.;
 
-	if(block->GetEnergy(0)>0.&&block->GetTime(0)>=timemin&&block->GetTime(0)<=timemax)
-	  blocksenergy[block->GetBlockNumber()]=block->GetEnergy(0);
+        if(block->GetEnergy(0)>0.&&block->GetTime(0)>=timemin&&block->GetTime(0)<=timemax)
+          blocksenergy[block->GetBlockNumber()]=block->GetEnergy(0);
 
-	if(block->GetEnergy(1)>0.&&block->GetTime(1)>=timemin&&block->GetTime(1)<=timemax
-	   && (TMath::Abs( (block->GetTime(1) )-( (timemax+timemin)/2.) ) <
-	       TMath::Abs( (block->GetTime(0) )-( (timemax+timemin)/2.) ) )   )
-	  blocksenergy[block->GetBlockNumber()]=block->GetEnergy(1);
+        if(block->GetEnergy(1)>0.&&block->GetTime(1)>=timemin&&block->GetTime(1)<=timemax
+          && (TMath::Abs( (block->GetTime(1) )-( (timemax+timemin)/2.) ) <
+              TMath::Abs( (block->GetTime(0) )-( (timemax+timemin)/2.) ) )   )
+          blocksenergy[block->GetBlockNumber()]=block->GetEnergy(1);
       }
       fEnergy+=blocksenergy[block->GetBlockNumber()];
     }
@@ -274,15 +277,19 @@ void TCaloCluster::Display(TCanvas *display, Float_t HistMax, Float_t BlockThres
       TCaloBlock *block=(TCaloBlock*)ref->GetObject();
       if(blocksenergy[block->GetBlockNumber()]<=0.) blocksenergy[block->GetBlockNumber()]=0.000000001;
       if(fEnergy>0){
-	wei=TMath::Max(0.,wei0+TMath::Log(blocksenergy[block->GetBlockNumber()]/fEnergy));
-      }else{
-	wei=0.;
+        // 2025/09/16: add energy dependent wei0 based on the study from Wassim and Malek
+        wei0=TMath::Log(100*fEnergy/(2.02*TMath::Exp(-1*d/RM)+(4.98*TMath::Exp(-1*d/RM)+0.30)*fEnergy));
+        wei_out = wei0;
+	      wei=TMath::Max(0.,wei0+TMath::Log(blocksenergy[block->GetBlockNumber()]/fEnergy));
+      }
+      else{
+	      wei=0.;
       }
       xclust+=wei*fgGeometry.GetBlockXPos(block->GetBlockNumber());
       yclust+=wei*fgGeometry.GetBlockYPos(block->GetBlockNumber());
       sumwei+=wei;
       //cout<<wei<<" "<<block->GetBlockNumber()<<" "<<block->GetBlockEnergy()<<" "<<fgGeometry.GetBlockXPos(block->GetBlockNumber())<<" "<<fgGeometry.GetBlockYPos(block->GetBlockNumber())<<endl;
-   }
+    }
     if(sumwei>0.) {
       //20190424(start)
       // xclust=(xclust/sumwei)-fgGeometry.GetCenterXPos();

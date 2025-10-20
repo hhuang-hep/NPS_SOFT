@@ -87,7 +87,7 @@ class TDVCSEvent : public TDVCSBase
 
   Bool_t ThereIsAProton(void); 
 
-  TLorentzVector GetPhoton(Int_t clus=0, Float_t a=7., Float_t b=0.);
+  TLorentzVector GetPhoton(Int_t clus=0, Float_t a=7., Float_t b=0., Float_t &a_out =*(new Float_t));
   TVector3 GetProtonDirFast(void);
 
   TLorentzVector GetElectron(void) { return fElectron ; }

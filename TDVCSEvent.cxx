@@ -89,7 +89,7 @@ Bool_t TDVCSEvent::ThereIsAProton(void)
 }
 
 //_____________________________________________________________________________
- TLorentzVector TDVCSEvent::GetPhoton(Int_t clus, Float_t a, Float_t b)
+ TLorentzVector TDVCSEvent::GetPhoton(Int_t clus, Float_t a, Float_t b, Float_t &a_out)
 {
   //    It returns the photon 4-vector for the cluster number "clus". 
   //Vertex (assuming no rastering) and shower depth corrections are implemented.
@@ -119,10 +119,13 @@ Bool_t TDVCSEvent::ThereIsAProton(void)
     vert_dist-=fVertex(2)*TMath::Cos(-calo_yaw);//fVertex(2) = smeared vertex z //[cm]
     vert_dist-=fVertex(0)*TMath::Sin(-calo_yaw);//fvertex(0) = smeared vertex x ( = 0 cm)
 
+	// according to Wassim and Malek's study for NPS resolution (2025/09/16)
+	a = 9.316+(5.079*0.001/(1-7.62*0.0001-TMath::Exp(1.07*0.001*energy)));
+	
     //addendum according to Malek, to optimize shower depth a //14-Nov-2017
-    a = 0.30*TMath::Power(energy*1000.0,0.28)+4.862;//energy of photons needs to be converted in MeV
+    // a = 0.30*TMath::Power(energy*1000.0,0.28)+4.862;//energy of photons needs to be converted in MeV
     //
-
+	a_out = a;
     //correct cluster position for shower depth and vertex
     xphot-=xphot*a*TMath::Power(energy,b)/TMath::Sqrt(vert_dist*vert_dist+xphot*xphot);
     //moving the cluster position according to the vertex position
