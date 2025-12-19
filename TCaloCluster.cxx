@@ -242,7 +242,7 @@ void TCaloCluster::Display(TCanvas *display, Float_t HistMax, Float_t BlockThres
     Float_t xclust=0.;
     Float_t yclust=0.;
     sumwei=0.;
-    d=2.16; // NPS crystal size in cm
+    d=2.05; // NPS crystal size in cm
     RM=2.19; //Moliere Radius of PbWO4 in cm
     
     fEnergy=0.;//GetEnergy();
@@ -277,8 +277,9 @@ void TCaloCluster::Display(TCanvas *display, Float_t HistMax, Float_t BlockThres
       TCaloBlock *block=(TCaloBlock*)ref->GetObject();
       if(blocksenergy[block->GetBlockNumber()]<=0.) blocksenergy[block->GetBlockNumber()]=0.000000001;
       if(fEnergy>0){
-        // 2025/09/16: add energy dependent wei0 based on the study from Wassim and Malek
-        wei0=TMath::Log(100*fEnergy/(2.02*TMath::Exp(-1*d/RM)+(4.98*TMath::Exp(-1*d/RM)+0.30)*fEnergy));
+        wei0=3.6;  // Study using HallC NPS-Gean4 simulation
+        // wei0=TMath::Log(100*fEnergy/(2.02*TMath::Exp(-1*d/RM)+(4.98*TMath::Exp(-1*d/RM)+0.30)*fEnergy)); // based on the study from Malek
+        // wei0=4.3;  // HallA
         wei_out = wei0;
 	      wei=TMath::Max(0.,wei0+TMath::Log(blocksenergy[block->GetBlockNumber()]/fEnergy));
       }

@@ -89,7 +89,7 @@ Bool_t TDVCSEvent::ThereIsAProton(void)
 }
 
 //_____________________________________________________________________________
- TLorentzVector TDVCSEvent::GetPhoton(Int_t clus, Float_t a, Float_t b, Float_t &a_out)
+ TLorentzVector TDVCSEvent::GetPhoton(Int_t clus, Float_t a, Float_t b, Float_t &a_out, Float_t &x, Float_t &y, Float_t &x_corr, Float_t &y_corr)
 {
   //    It returns the photon 4-vector for the cluster number "clus". 
   //Vertex (assuming no rastering) and shower depth corrections are implemented.
@@ -109,8 +109,9 @@ Bool_t TDVCSEvent::ThereIsAProton(void)
   TLorentzVector recphot(0.,0.,0.,0.);
   Float_t energy=fCaloEvent->GetCluster(clus)->GetE();
   Float_t xphot=fCaloEvent->GetCluster(clus)->GetX();
+  x=xphot; // original cluster position before any correction
   Float_t yphot=fCaloEvent->GetCluster(clus)->GetY();
-
+  y=yphot; // original cluster position before any correction
   if(energy==0) {
     return recphot;
   } else {
@@ -119,25 +120,31 @@ Bool_t TDVCSEvent::ThereIsAProton(void)
     vert_dist-=fVertex(2)*TMath::Cos(-calo_yaw);//fVertex(2) = smeared vertex z //[cm]
     vert_dist-=fVertex(0)*TMath::Sin(-calo_yaw);//fvertex(0) = smeared vertex x ( = 0 cm)
 
-	// according to Wassim and Malek's study for NPS resolution (2025/09/16)
-	a = 9.316+(5.079*0.001/(1-7.62*0.0001-TMath::Exp(1.07*0.001*energy)));
-	
-    //addendum according to Malek, to optimize shower depth a //14-Nov-2017
+    a = 5.385+(2.554*0.001/(1-6.398*0.0001-TMath::Exp(0.4769*0.001*energy)));// Study using HallC NPS-Gean4 simulation(fit-v2)
+    a_out = a; // output shower depth to the Tree
+	// a=0.823561*TMath::Power(energy*1000,0.197725)+1.11053e-11; // Study using HallC NPS-Gean4 simulation(fit-v1)
+	// a = 9.316+(5.079*0.001/(1-7.62*0.0001-TMath::Exp(1.07*0.001*energy))); // according Malek's study (NPS ELog#196)
+    //addendum according to Malek, to optimize shower depth a //14-Nov-2017, used in HallA DVCS
     // a = 0.30*TMath::Power(energy*1000.0,0.28)+4.862;//energy of photons needs to be converted in MeV
     //
-	a_out = a;
     //correct cluster position for shower depth and vertex
     xphot-=xphot*a*TMath::Power(energy,b)/TMath::Sqrt(vert_dist*vert_dist+xphot*xphot);
+	
     //moving the cluster position according to the vertex position
     xphot+=fVertex(2)*TMath::Sin(-calo_yaw);
     xphot-=fVertex(0)*TMath::Cos(-calo_yaw);
     
     yphot-=yphot*a*TMath::Power(energy,b)/TMath::Sqrt(vert_dist*vert_dist+yphot*yphot);
+
     yphot-=fVertex(1);
+
+    x_corr=xphot; // output for the Tree
+	  y_corr=yphot; // output for the Tree
 
     //photon angles
     thphot= -calo_yaw+ TMath::ATan(xphot/vert_dist);
     phphot= TMath::ATan(yphot/TMath::Sqrt(vert_dist*vert_dist+xphot*xphot));
+	// Here phphot is defined as the angle between the photon direction and the x–z plane (not the usual azimuthal angle).
 
     // Correct for pitch (assuming we point right at target center)
 
@@ -152,6 +159,86 @@ Bool_t TDVCSEvent::ThereIsAProton(void)
 
     return recphot;
   }
+}
+
+//_____________________________________________________________________________
+TLorentzVector TDVCSEvent::GetPhotonDirect(Int_t clus, Float_t a, Float_t b, Float_t &a_out, Float_t &x, Float_t &y, Float_t &x_corr, Float_t &y_corr)
+{
+    //    It returns the photon 4-vector for the cluster number "clus". 
+    //Vertex (assuming no rastering) and shower depth corrections are implemented.
+    //    The reconstruction algorithm depends on 3 parameters:
+    //wei0 (in TCaloParameters)  tunes relative block weighting, a and b 
+    //(in TDVCSParameters) correct for shower depth.
+
+    Float_t thphot,phphot;
+    Float_t vert_dist=fgGeometry.GetCaloDist();
+    Float_t calo_pitch=fgGeometry.GetCaloPitch();
+    Float_t calo_roll=fgGeometry.GetCaloRoll();
+    Float_t calo_yaw=fgGeometry.GetCaloTheta();
+    TVector3 recphotvect(0.,0.,0.);
+    TLorentzVector recphot(0.,0.,0.,0.);
+    Float_t energy=fCaloEvent->GetCluster(clus)->GetE();
+    Float_t xphot=fCaloEvent->GetCluster(clus)->GetX();
+    x=xphot;
+    Float_t yphot=fCaloEvent->GetCluster(clus)->GetY();
+    y=yphot;	
+    if(energy==0) {
+        return recphot;
+    } 
+    else {
+        TMatrixD Mt(3,3),A(3,3),B(3,1),C(3,1);
+        for(Int_t i=0;i<3;i++){
+            for(Int_t j=0;j<3;j++){
+                Mt(i,j)=0.;
+            }
+        }
+        TVector3 v1,v2,v3,OV,OC,CC,VM,VMM,CM;
+
+        a = 5.478+(2.542*0.001/(1-6.477*0.0001-TMath::Exp(0.4197*0.001*energy)));// Study using HallC NPS-Gean4 simulation(fit-v2)
+        // a=0.823561*TMath::Power(energy*1000,0.197725)+1.11053e-11; // Study using HallC NPS-Gean4 simulation
+        // a = 9.316+(5.079*0.001/(1-7.62*0.0001-TMath::Exp(1.07*0.001*energy))); // according Malek's study (NPS ELog#196)
+        //addendum according to Malek, to optimize shower depth a //14-Nov-2017, used in HallA DVCS
+        // a = 0.30*TMath::Power(energy*1000.0,0.28)+4.862;//energy of photons needs to be converted in MeV
+        //
+        a_out = a;
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //Intersection coordinates (x_corr,y_corr) of a particule (known 4-vector photonA) with NPS front face//
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
+        Mt(0,0)=TMath::Cos(calo_yaw); Mt(0,2)=-TMath::Sin(calo_yaw); // calo_yaw is already negative!!!!!!!!
+        Mt(2,0)=TMath::Sin(calo_yaw); Mt(2,2)=TMath::Cos(calo_yaw);
+        Mt(1,1)=1;
+        v1.SetXYZ(Mt(0,0),Mt(1,0),Mt(2,0));
+        v2.SetXYZ(Mt(0,1),Mt(1,1),Mt(2,1));
+        v3.SetXYZ(Mt(0,2),Mt(1,2),Mt(2,2));
+
+        OC.SetXYZ(-vert_dist*TMath::Sin(calo_yaw),0,vert_dist*TMath::Cos(calo_yaw));
+        OV.SetXYZ(fVertex(0),fVertex(1),fVertex(2)); //vertex coordinates
+
+        // VM=photonA.Vect();
+        // B(0,0)=OV.X()-OC.X()-a*v3.X(); //a : shower depth (what we want to adjust)
+        // B(1,0)=OV.Y()-OC.Y()-a*v3.Y();
+        // B(2,0)=OV.Z()-OC.Z()-a*v3.Z();
+        // A(0,0)=-VM.X(); A(1,0)=-VM.Y(); A(2,0)=-VM.Z();
+        // A(0,1)=v1.X(); A(1,1)=v1.Y(); A(2,1)=v1.Z();
+        // A(0,2)=v2.X(); A(1,2)=v2.Y(); A(2,2)=v2.Z();
+        // A.Invert();
+        // C=A*B;
+        // x_corr=C(1,0);
+        // y_corr=C(2,0);
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //Calculation of a photon 4-vector detected in NPS by taking into account the shower depth correction "a"//
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        CM=xphot*v1+yphot*v2+a*v3; //v1, v2, v3 already defined above
+        VMM=-OV+OC+CM; // OV and OC already defined above
+        VMM=(energy/VMM.Mag())*VMM;
+        recphot.SetPxPyPzE(VMM.X(),VMM.Y(),VMM.Z(),energy);
+
+        return recphot;
+    }
 }
 
 //_____________________________________________________________________________
