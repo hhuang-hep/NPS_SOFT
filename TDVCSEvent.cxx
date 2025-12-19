@@ -89,7 +89,7 @@ Bool_t TDVCSEvent::ThereIsAProton(void)
 }
 
 //_____________________________________________________________________________
- TLorentzVector TDVCSEvent::GetPhoton(Int_t clus, Float_t a, Float_t b, Float_t &a_out, Float_t &x, Float_t &y, Float_t &x_corr, Float_t &y_corr)
+ TLorentzVector TDVCSEvent::GetPhoton(Int_t clus, Float_t a, Float_t b, Float_t &a_out, Float_t &x_corr, Float_t &y_corr)
 {
   //    It returns the photon 4-vector for the cluster number "clus". 
   //Vertex (assuming no rastering) and shower depth corrections are implemented.
@@ -109,9 +109,7 @@ Bool_t TDVCSEvent::ThereIsAProton(void)
   TLorentzVector recphot(0.,0.,0.,0.);
   Float_t energy=fCaloEvent->GetCluster(clus)->GetE();
   Float_t xphot=fCaloEvent->GetCluster(clus)->GetX();
-  x=xphot; // original cluster position before any correction
   Float_t yphot=fCaloEvent->GetCluster(clus)->GetY();
-  y=yphot; // original cluster position before any correction
   if(energy==0) {
     return recphot;
   } else {
@@ -162,7 +160,7 @@ Bool_t TDVCSEvent::ThereIsAProton(void)
 }
 
 //_____________________________________________________________________________
-TLorentzVector TDVCSEvent::GetPhotonDirect(Int_t clus, Float_t a, Float_t b, Float_t &a_out, Float_t &x, Float_t &y, Float_t &x_corr, Float_t &y_corr)
+TLorentzVector TDVCSEvent::GetPhotonDirect(Int_t clus, Float_t a, Float_t b, Float_t &a_out, Float_t &x_corr, Float_t &y_corr)
 {
     //    It returns the photon 4-vector for the cluster number "clus". 
     //Vertex (assuming no rastering) and shower depth corrections are implemented.
@@ -179,9 +177,7 @@ TLorentzVector TDVCSEvent::GetPhotonDirect(Int_t clus, Float_t a, Float_t b, Flo
     TLorentzVector recphot(0.,0.,0.,0.);
     Float_t energy=fCaloEvent->GetCluster(clus)->GetE();
     Float_t xphot=fCaloEvent->GetCluster(clus)->GetX();
-    x=xphot;
     Float_t yphot=fCaloEvent->GetCluster(clus)->GetY();
-    y=yphot;	
     if(energy==0) {
         return recphot;
     } 

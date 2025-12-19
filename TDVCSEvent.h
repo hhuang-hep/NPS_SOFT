@@ -87,9 +87,9 @@ class TDVCSEvent : public TDVCSBase
 
   Bool_t ThereIsAProton(void); 
 
-  TLorentzVector GetPhoton(Int_t clus=0, Float_t a=7., Float_t b=0., Float_t &a_out =*(new Float_t), Float_t &x =*(new Float_t), Float_t &y =*(new Float_t), Float_t &x_corr =*(new Float_t), Float_t &y_corr =*(new Float_t));
+  TLorentzVector GetPhoton(Int_t clus=0, Float_t a=7., Float_t b=0., Float_t &a_out =*(new Float_t), Float_t &x_corr =*(new Float_t), Float_t &y_corr =*(new Float_t));
 
-  TLorentzVector GetPhotonDirect(Int_t clus=0, Float_t a=7., Float_t b=0., Float_t &a_out =*(new Float_t), Float_t &x =*(new Float_t), Float_t &y =*(new Float_t), Float_t &x_corr =*(new Float_t), Float_t &y_corr =*(new Float_t));
+  TLorentzVector GetPhotonDirect(Int_t clus=0, Float_t a=7., Float_t b=0., Float_t &a_out =*(new Float_t), Float_t &x_corr =*(new Float_t), Float_t &y_corr =*(new Float_t));
 
   TVector3 GetProtonDirFast(void);
 
