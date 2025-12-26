@@ -145,7 +145,7 @@ ClassImp(TDVCSDB)
   sql+=" ORDER BY time DESC";
   TSQLResult *res=fServer->Query(sql);
   if(res->GetRowCount()==0) {
-    cout<<"There's no entry for that run: returning -1"<<endl;
+    cout<<"There's no entry for run: "<<run<<", returning -1"<<endl;
     return -1;
   }
   TSQLRow* row=res->Next();
