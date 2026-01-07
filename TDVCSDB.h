@@ -74,6 +74,7 @@ class TDVCSDB : public TObject
     void AddEntry_f(const char* tablename, Int_t runmin, Int_t runmax, Float_t* val, const char* comment="");
     void AddEntry_d(const char* tablename, Int_t runmin, Int_t runmax, Double_t* val, const char* comment="");
     void AddEntry_i(const char* tablename, Int_t runmin, Int_t runmax, Int_t* val, const char* comment="");
+    void AddEntry_s(const char* tablename, Int_t runmin, Int_t runmax, const char** val, const char* comment);
     Int_t AddOneEntry(const char* tablename, Int_t runmin, Int_t runmax, Double_t val, const char* comment="");
     Int_t CopyEntry(const char* tablename, Int_t run, Int_t runmin, Int_t runmax, const char* comment="");
 
@@ -84,6 +85,7 @@ class TDVCSDB : public TObject
     Double_t* GetEntry_d(const char* tablename, Int_t run);
     Float_t* GetEntry_f(const char* tablename, Int_t run);
     Int_t* GetEntry_i(const char* tablename, Int_t run);
+    const char** GetEntry_s(const char* tablename, Int_t run);
     
     Double_t GetEntry_d(const char* tablename, Int_t run, Int_t col);
     Float_t GetEntry_f(const char* tablename, Int_t run, Int_t col);

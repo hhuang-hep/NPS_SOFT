@@ -543,6 +543,73 @@ void TDVCSDB::AddEntry_d(const char* tablename, Int_t runmin, Int_t runmax, Doub
 }
 
 //_____________________________________________________________________________
+void TDVCSDB::AddEntry_s(const char* tablename, Int_t runmin, Int_t runmax, const char** val, const char* comment)
+{
+  TSQLResult *res1 = 0;
+  TSQLRow    *row1 = 0;
+
+  // count rows
+  TString sql0 = "SELECT COUNT(*) FROM ";
+  sql0 += tablename;
+  TSQLResult *res0 = fServer->Query(sql0);
+  TSQLRow *row0 = res0->Next();
+  Int_t nbofrows = atoi(row0->GetField(0));
+
+  Int_t last;
+  if(nbofrows > 0){
+    TString sql = "SELECT MAX(ValueId) AS ValueId FROM ";
+    sql += tablename;
+    res1 = fServer->Query(sql);
+    row1 = res1->Next();
+    last = atoi(row1->GetField(0));
+  } else {
+    last = -1;
+  }
+
+  // get number of columns
+  TString sql2 = "SELECT * FROM ";
+  sql2 += tablename;
+  sql2 += " WHERE ValueId=";
+  sql2 += last;
+  TSQLResult *res2 = fServer->Query(sql2);
+  Int_t ncol = res2->GetFieldCount();
+
+  // build INSERT query
+  TString query = "INSERT INTO ";
+  query += tablename;
+  query += " VALUES (";
+
+  // string values
+  for(Int_t i = 0; i < ncol-6; i++){
+    query += "'";
+    query += val[i];
+    query += "',";
+  }
+
+  // metadata
+  query += runmin;
+  query += ",";
+  query += runmax;
+  query += ",'";
+  query += fUser;
+  query += "',NOW(),'";
+  query += comment;
+  query += "',";
+  query += last + 1;
+  query += ")";
+
+  TSQLResult *res3 = fServer->Query(query);
+
+  // cleanup
+  if(row1) delete row1;
+  delete row0;
+  if(res1) delete res1;
+  delete res2;
+  delete res3;
+  delete res0;
+}
+
+//_____________________________________________________________________________
   void TDVCSDB::GetEntry(const char* tablename, Int_t run, const char* filename){
 
   ofstream f(filename);
@@ -619,6 +686,29 @@ void TDVCSDB::AddEntry_d(const char* tablename, Int_t runmin, Int_t runmax, Doub
   TSQLRow *row=res->Next();
   for(Int_t i=0;i<col-6;i++){
     if(row->GetFieldLength(i)) val[i]=atof(row->GetField(i));
+  }
+  delete res; delete row;
+  return val;
+}
+
+//_____________________________________________________________________________
+const char** TDVCSDB::GetEntry_s(const char* tablename, Int_t run)
+{
+  // Returns the whole entry as an array.
+  //
+  //Warning : This method allocates dynamically a new array in memory.
+  //YOU'RE RESPONSIBLE of deleting this array when you don't need it anymore
+  //
+
+  TString sql("SELECT * FROM ");
+  sql+=tablename;sql+=" WHERE ValueId = ";
+  sql+=GetLastValueId(tablename,run);
+  TSQLResult *res=fServer->Query(sql);
+  Int_t col=res->GetFieldCount();
+  const char** val = new const char*[col-6];
+  TSQLRow *row=res->Next();
+  for(Int_t i=0;i<col-6;i++){
+    if(row->GetFieldLength(i)) val[i]=strdup(row->GetField(i));
   }
   delete res; delete row;
   return val;
