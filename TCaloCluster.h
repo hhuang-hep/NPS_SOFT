@@ -76,7 +76,7 @@ class TCaloCluster : public TCaloBase
 
   
   Float_t GetEnergy(void);
-  Float_t SetEnergy(Float_t energy) { fEnergy=energy ; }
+  void SetEnergy(Float_t energy) { fEnergy=energy ; }
   Int_t GetClusSize (void) {return fClusSize ; }
   void SetClusSize (Int_t size) { fClusSize = size ; }
   void Display(TCanvas *display, Float_t HistMax=-1., Float_t BlockThreshold=0.);
